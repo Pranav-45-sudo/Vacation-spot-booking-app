@@ -1,0 +1,147 @@
+<html>
+
+<head>
+    <title>Create</title>
+</head>
+<style>
+    body {
+        background-image: url('../../Static Folder/core/trip.png');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header {
+        font-size: 2cm;
+        color: blue;
+        font-weight: bold;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container {
+        background-color: black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        margin: auto;
+    }
+
+    .login-container h2 {
+        text-align: center;
+        color: white;
+    }
+
+    label {
+        color: white;
+    }
+
+    .showpassword {
+        cursor: pointer;
+    }
+
+    .login-container input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .login-container button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: blue;
+        color: white;
+        cursor: pointer;
+    }
+
+    .login-container button:hover {
+        background-color: darkblue;
+    }
+</style>
+
+<body>
+    <h2 class="header">New Register</h2>
+    <div class="login-container">
+        <form action="">
+            <label for="Username">Username</label>
+            <input type="text" id="Username" placeholder="Username" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password" required>
+            <label for="confirmpassword">confirm Password</label>
+            <input type="password" id="confirmpassword" placeholder="confirm Password" required>
+            <label for="showpassword">Show Password</label>
+            <input type="checkbox" id="showpassword" class="showpassword">
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <SCRIPT>
+        // Simple hash function to simulate security (never store plain text passwords)
+        async function hashPassword(password) {
+            const msgBuffer = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        const showPasswordCheckbox = document.getElementById("showpassword");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmpassword");
+
+        showPasswordCheckbox.addEventListener('change', function () {
+            if (this.checked) {
+                passwordInput.type = "text";
+                confirmPasswordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+                confirmPasswordInput.type = "password";
+            }
+        });
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent actual form submission
+
+            const username = document.getElementById("Username").value;
+            const email = document.getElementById("email").value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            // Simulate Database Insertion
+            // We store the Hash, not the password
+            const hashedPassword = await hashPassword(password);
+
+            const userRecord = {
+                username: username,
+                email: email,
+                password_hash: hashedPassword
+            };
+
+            // Saving to localStorage to simulate "Database"
+            localStorage.setItem('user_' + email, JSON.stringify(userRecord));
+
+            alert("Registration Successful! Redirecting to login...");
+            window.location.href = "2nd.html";
+        });
+    </SCRIPT>
+</body>
+
+</html>

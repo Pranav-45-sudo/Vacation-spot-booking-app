@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <title>VacMode App</title>
+    
+<style>
+body{
+      background-image: url('../../Static Folder/core/trip.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+header{
+position: absolute;
+margin:0;
+top: 20px;
+font-size: 4cm;
+color: blue;
+font-weight: 400 ;
+}
+        /* Card Container */
+/* Container set to the exact width from your image */
+/* Container to handle spacing and centering */
+.card-group {
+  display: flex;
+  justify-content: center; /* Centers cards horizontally */
+  align-items: flex-start;
+  gap: 24px;              /* THIS ADDS THE SPACE BETWEEN CARDS */
+  padding: 40px;
+  flex-wrap: wrap;        /* Stack cards on small screens */
+}
+
+/* Individual Card Styling */
+.card {
+  width: 286px;
+  background-color: #1a1d20;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;      /* Crops image perfectly to 286x180 */
+  display: block;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  color: white;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.card-text {
+  color: #adb5bd;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  min-height: 60px;       /* Keeps card heights consistent */
+}
+
+/* Button Styling */
+.btn {
+  display: inline-block;
+  background-color: #0d6efd;
+  color: white;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0b5ed7;
+}</style>
+</head>
+<body>
+<header>VacMode App</header>
+<div class="card-group">
+  
+  <div class="card">
+    <img src="../../Static Folder/core/trek.png" alt="Hiking" class="card-img">
+    <div class="card-body">
+      <h3 class="card-title">Treks</h3>
+      <p class="card-text">"Your journey to breathtaking views begins with one click—reserve your trek now!"</p>
+      <a href="trek.html" class="btn">Explore</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../../Static Folder/core/villa.png" alt="Villa" class="card-img">
+    <div class="card-body">
+      <h3 class="card-title">Villas</h3>
+      <p class="card-text">"Luxury stays in scenic locations—discover your perfect getaway!"</p>
+      <a href="villa.html" class="btn">Explore</a>
+    </div>
+  </div>
+  <div class="card">
+    <img src="../../Static Folder/core/beach.jpg" alt="" class="card-img">
+    <div class="card-body">
+      <h3 class="card-title">Beaches</h3>
+      <p class="card-text">"Relax and unwind on pristine beaches—your perfect coastal escape is just a click away!"</p>
+      <a href="beach.html" class="btn">Explore</a>
+    </div>
+  </div>
+   <div class="card">
+    <img src="../../Static Folder/core/Jungle.jpg" alt="" class="card-img">
+    <div class="card-body">
+      <h3 class="card-title">Jungle Safari</h3>
+      <p class="card-text">"Experience the thrill of jungle adventures—discover hidden wonders and wildlife!"</p>
+      <a href="Jungle.html" class="btn">Explore</a>
+    </div>
+  </div>
+  <script>
+    const username = localStorage.getItem('loggedInUser');
+if (username) {
+    document.querySelector('.header').textContent = "Welcome back, " + username + "!";
+}
+  </script>
+</body>
+</html>

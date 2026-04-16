@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jungle Safari Booking</title>
+    <style>
+        body {
+            background-image: url('../../Static Folder/core/jungleblur.png');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .booking-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 12px;
+            box-sizing: border-box;
+            margin: 20px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            box-sizing: border-box;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        .price-display {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #212529;
+            margin-bottom: 20px;
+        }
+
+        .btn-submit,
+        .btn-print,
+        .btn-back {
+            background-color: #0d6efd;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-submit:hover {
+            background-color: #0b5ed7;
+        }
+
+        .btn-print {
+            background-color: #198754;
+        }
+
+        .btn-print:hover {
+            background-color: #157347;
+        }
+
+        .btn-back {
+            background-color: #6c757d;
+            margin-top: 10px;
+        }
+
+        .btn-back:hover {
+            background-color: #5c636a;
+        }
+
+        /* Ticket Styles */
+        #ticket-view {
+            display: none;
+            /* Hidden by default */
+            padding: 20px;
+            border: 2px dashed #333;
+            background: #fff;
+        }
+
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ticket-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .ticket-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .ticket-value {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .ticket-total {
+            border-top: 2px solid #333;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-size: 1.3rem;
+            text-align: right;
+            color: #d63384;
+        }
+
+        /* Print Specifics */
+        @media print {
+            body {
+                background: white;
+                display: block;
+            }
+
+            .booking-container {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            #booking-form,
+            .header h2,
+            .btn-print,
+            .btn-back {
+                display: none !important;
+            }
+
+            #ticket-view {
+                display: block !important;
+                border: 2px solid black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="booking-container">
+
+        <!-- Booking Form -->
+        <div id="booking-form">
+            <div class="header">
+                <h2>Book Your Safari Adventure</h2>
+            </div>
+
+            <form id="safariForm" enctype="multipart/form-data">
+
+                <!-- Safari Details Section -->
+                <div class="form-group">
+                    <label for="park">Select National Park:</label>
+                    <select id="park" name="park" required>
+                        <option value="" disabled selected>-- Choose a Park --</option>
+                        <option value="Pench National Park">Pench National Park</option>
+                        <option value="Tadoba Andhari">Tadoba Andhari Tiger Reserve</option>
+                        <option value="Koyana Forest">Koyana Wildlife Sanctuary</option>
+                        <option value="Radhanagari Forest">Radhanagari Wildlife Sanctuary</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col form-group">
+                        <label for="date">Safari Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="col form-group">
+                        <label for="slot">Time Slot:</label>
+                        <select id="slot" name="slot" required>
+                            <option value="" disabled selected>-- Select Slot --</option>
+                            <option value="Morning">Morning (6:00 AM - 10:00 AM)</option>
+                            <option value="Evening">Evening (2:30 PM - 6:30 PM)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col form-group">
+                        <label for="vehicle">Vehicle Type:</label>
+                        <select id="vehicle" name="vehicle" required onchange="calculatePrice()">
+                            <option value="Jeep" data-price="1000">Jeep (Gypsy) - ₹1000</option>
+                            <option value="Canter" data-price="1500">Canter - ₹1500</option>
+                        </select>
+                    </div>
+                    <div class="col form-group">
+                        <label for="persons">Total Persons:</label>
+                        <input type="number" id="persons" name="persons" min="1" max="20" placeholder="Min 1" value="1"
+                            required oninput="calculatePrice()">
+                        <small style="color: #6c757d;">₹500 per person</small>
+                    </div>
+                </div>
+
+                <div class="price-display" id="totalPriceBox">
+                    Total Estimate: ₹1500
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+                <!-- Personal Details Section -->
+                <div class="form-group">
+                    <label for="name">Contact Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="10-digit number"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_proof">Payment Method</label>
+                    <select id="id_proof" name="id_proof" required>
+                        <option value="" disabled selected>-- Choose a Payment Method --</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Net Banking">Net Banking</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Confirm Booking</button>
+            </form>
+        </div>
+
+        <!-- Ticket View (Hidden initially) -->
+        <div id="ticket-view">
+            <div class="ticket-header">
+                <h2>SAFARI BOOKING CONFIRMATION</h2>
+                <p>Booking ID: <span id="ticket-id">#12345</span></p>
+            </div>
+
+            <div class="ticket-row"><span class="ticket-label">Park:</span> <span class="ticket-value"
+                    id="t-park"></span></div>
+            <div class="ticket-row"><span class="ticket-label">Date:</span> <span class="ticket-value"
+                    id="t-date"></span></div>
+            <div class="ticket-row"><span class="ticket-label">Slot:</span> <span class="ticket-value"
+                    id="t-slot"></span></div>
+            <div class="ticket-row"><span class="ticket-label">Vehicle:</span> <span class="ticket-value"
+                    id="t-vehicle"></span></div>
+            <div class="ticket-row"><span class="ticket-label">Persons:</span> <span class="ticket-value"
+                    id="t-persons"></span></div>
+            <hr>
+            <div class="ticket-row"><span class="ticket-label">Name:</span> <span class="ticket-value"
+                    id="t-name"></span></div>
+            <div class="ticket-row"><span class="ticket-label">Mobile:</span> <span class="ticket-value"
+                    id="t-mobile"></span></div>
+
+            <div class="ticket-total">
+                TOTAL PAID: <span id="t-total"></span>
+            </div>
+
+            <button class="btn-print" onclick="window.print()">Print Ticket</button>
+            <button class="btn-back" onclick="location.reload()">Book Another</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Constants for pricing
+        const PRICE_PER_PERSON = 500;
+
+        function calculatePrice() {
+            const vehicleSelect = document.getElementById('vehicle');
+            const personsInput = document.getElementById('persons');
+
+            let vehiclePrice = 0;
+            // Get price from data attribute of selected option
+            if (vehicleSelect.selectedOptions.length > 0) {
+                vehiclePrice = parseInt(vehicleSelect.selectedOptions[0].getAttribute('data-price')) || 0;
+            }
+
+            const persons = parseInt(personsInput.value) || 0;
+            const total = vehiclePrice + (persons * PRICE_PER_PERSON);
+
+            document.getElementById('totalPriceBox').innerText = 'Total Estimate: ₹' + total;
+            return total;
+        }
+
+        // Check if returning from payment
+        window.onload = function () {
+            calculatePrice();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('payment') === 'success') {
+                const savedData = JSON.parse(localStorage.getItem('tempBookingData'));
+                if (savedData) {
+                    showTicket(savedData);
+                    // Optional: Clear data after showing ticket
+                    // localStorage.removeItem('tempBookingData');
+                }
+            }
+        };
+
+        function showTicket(data) {
+            document.getElementById('ticket-id').innerText = '#' + Math.floor(Math.random() * 100000);
+            document.getElementById('t-park').innerText = data.park;
+            document.getElementById('t-date').innerText = data.date;
+            document.getElementById('t-slot').innerText = data.slot;
+            document.getElementById('t-vehicle').innerText = data.vehicle;
+            document.getElementById('t-persons').innerText = data.persons;
+            document.getElementById('t-name').innerText = data.name;
+            document.getElementById('t-mobile').innerText = data.mobile;
+            document.getElementById('t-total').innerText = 'â‚¹' + data.totalCost;
+
+            document.getElementById('booking-form').style.display = 'none';
+            document.getElementById('ticket-view').style.display = 'block';
+        }
+
+        // Handle Form Submission
+        document.getElementById('safariForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Stop actual form submission
+
+            // 1. Gather Data
+            const park = document.getElementById('park').value;
+            const date = document.getElementById('date').value;
+            const slot = document.getElementById('slot').value;
+            const vehicle = document.getElementById('vehicle').value;
+            const persons = document.getElementById('persons').value;
+            const name = document.getElementById('name').value;
+            const mobile = document.getElementById('mobile').value;
+            const paymentMethod = document.getElementById('id_proof').value;
+            const totalCost = calculatePrice();
+
+            // 2. Save Data to Persist Across Redirect
+            const bookingData = {
+                park, date, slot, vehicle, persons, name, mobile, totalCost
+            };
+            localStorage.setItem('tempBookingData', JSON.stringify(bookingData));
+
+            // 3. Redirect to Payment Page
+            if (paymentMethod === 'UPI') {
+                window.location.href = 'UPI.html';
+            } else if (paymentMethod === 'Credit Card') {
+                window.location.href = 'Credit Card.html';
+            } else if (paymentMethod === 'Net Banking') {
+                window.location.href = 'netbanking.html';
+            } else {
+                alert("Please select a valid payment method.");
+            }
+        });
+    </script>
+</body>
+
+</html>

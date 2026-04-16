@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <title>VacMode App</title>
+</head>
+<style>
+    body {
+        background-image: url('../../Static Folder/core/trip.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .header {
+        position: absolute;
+        top: 20px;
+        font-size: 3cm;
+        color: blue;
+        margin: 0;
+        margin-left: 30%;
+
+    }
+
+    .login-container {
+        background-color: rgba(0, 0, 0, 0.75);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+        width: 350px;
+        height: 350px;
+        margin-left: 37%;
+    }
+
+    .login-container header h3 {
+        color: white;
+        text-align: center;
+        margin: 0;
+        font-size: 28px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    label {
+        color: white;
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+    <h1 class="header">VacMode App</h1>
+    <div class="login-container">
+        <header>
+            <h3>Login Form</h3>
+        </header>
+        <form>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+            <button type="button" onclick="window.location.href='create.html'">Create Account</button>
+    </div>
+    <script>
+        // Simple hash function must match the one in create.html
+        async function hashPassword(password) {
+            const msgBuffer = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // 1. Retrieve user from "Database" (LocalStorage)
+            const storedUserJSON = localStorage.getItem('user_' + email);
+
+            if (!storedUserJSON) {
+                alert("User not found!");
+                return;
+            }
+
+            const storedUser = JSON.parse(storedUserJSON);
+
+            // 2. Hash the input password to compare with stored hash
+            // We NEVER compare plain text passwords
+            const hashedInputPassword = await hashPassword(password);
+
+            // 3. Compare Hashes
+            if (hashedInputPassword === storedUser.password_hash) {
+                alert("Login Successful!");
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Invalid Password!");
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway Interface</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .payment-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 750;
+            max-width: 400px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .method-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .method-btn.active {
+            border-color: #007bff;
+            background: #e7f1ff;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .pay-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="payment-container"
+        style="max-width: 400px; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+        <h3>Credit Card Details</h3>
+        <form id="cardForm">
+            <div style="margin-bottom: 15px;">
+                <label>Cardholder Name</label>
+                <input type="text" id="name" placeholder="John Doe" required style="width:100%; padding: 8px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label>Card Number</label>
+                <input type="text" id="cardNum" placeholder="0000 0000 0000 0000" maxlength="19" required
+                    style="width:100%; padding: 8px;">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <div style="flex: 1;">
+                    <label>Expiry</label>
+                    <input type="text" id="exp" placeholder="MM/YY" maxlength="5" required
+                        style="width:100%; padding: 8px;">
+                </div>
+                <div style="flex: 1;">
+                    <label>CVV</label>
+                    <input type="password" id="cvv" placeholder="123" maxlength="3" required
+                        style="width:100%; padding: 8px;">
+                </div>
+            </div>
+            <button type="submit"
+                style="width:100%; margin-top: 15px; background: #0056b3; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+                Authorize Payment
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Formatting Card Number
+        document.getElementById('cardNum').addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
+        });
+
+        // Formatting Expiry Date (Adds slash automatically)
+        document.getElementById('exp').addEventListener('input', (e) => {
+            let val = e.target.value.replace(/[^\d]/g, '');
+            if (val.length >= 2) val = val.slice(0, 2) + '/' + val.slice(2);
+            e.target.value = val;
+        });
+
+        document.getElementById('cardForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert("Payment Successful! Redirecting to ticket...");
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const returnUrl = urlParams.get('returnUrl') || 'jungle_form.html';
+            window.location.href = returnUrl + '?payment=success';
+        };
+    </script>
+
+</body>
+
+</html>

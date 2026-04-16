@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <title>VacMode App</title>
+    </head>
+    <style>
+        body{
+            background-image: url('../../Static Folder/core/beachblur.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row; 
+        }
+        header{
+            color: blue;
+            font-size: 2cm;
+            position: absolute;
+            top: 20px;
+            margin:0;
+            font-weight: 400 ;
+        }
+        .card-group {
+           display: flex;
+           flex-wrap: wrap;
+           align-items: flex-start;
+           gap:24px;
+           padding: 40px;
+           justify-content: center;
+        }
+        .card{
+            width: 286px;
+            border-radius: 12px;
+            background-color: #1a1d20;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: #1a1d20 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .card-img{
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            display:block
+        }
+        .card-body{
+            padding: 20px;
+        }
+        .card-title{
+            color: white;
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+        .card-text{
+            color: #adb5bd;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+        .btn{
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover{
+            background-color: darkred;
+        }
+</style>
+<body>
+    <div class="card-group">
+        <div class="card">
+            <img src="  ../../Static Folder/core/Alibag.png" alt="" class="card-img">
+            <div class="card-body">
+                <h3 class="card-title">Alibag</h3>
+                <p class="card-text">A beautiful villa with a stunning sea view, perfect for your summer getaway.</p>
+                <a href="bhomestay.html" class="btn">Book Now</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../Static Folder/core/Ganpatipule.png" alt="Villa 2" class="card-img">
+            <div class="card-body">
+                <h3 class="card-title">Ganpatipule</h3>
+                <p class="card-text">Escape to the mountains in this cozy villa surrounded by nature.</p>
+                <a href="bhomestay.html" class="btn">Book Now</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../Static Folder/core/Tarkarli.png" alt="" class="card-img">
+            <div class="card-body">
+                <h3 class="card-title">Tarkarli Beach</h3>
+                <p class="card-text">Enjoy the pristine beaches and crystal clear waters of Tarkarli.</p>
+                <a href="bhomestay.html" class="btn">Book Now</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../Static Folder/core/Guhagar.png" alt="" class="card-img">
+            <div class="card-body">
+                <h3 class="card-title">Guhagar Beach</h3>
+                <p class="card-text">Relax on the pristine beaches of Guhagar, known for its calm waters and scenic beauty.</p>
+                <a href="bhomestay.html" class="btn">Book Now</a>
+            </div>
+        </div>
+    </div>        
+       
+</body>
+</html>

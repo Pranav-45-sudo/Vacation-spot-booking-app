@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <title>UPI Payment</title>
+</head>
+<style>
+    body {
+        background-color: blue;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+    }
+
+    .upi {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 500px;
+        height: 750px;
+        overflow: hidden;
+        adjust-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .upi h1 {
+        font-size: 0.9cm;
+        color: black;
+        font-weight: bold;
+    }
+
+    .upi img {
+        width: 75%;
+        height: 75%;
+    }
+
+    .upi input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .upi button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .upi button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<body>
+    <div class="upi">
+        <h1>UPI Payment</h1>
+        <img src="../../Static Folder/core/QR.png" alt="">
+        <label for="upi">Upload Payment Screenshot</label>
+        <input type="file" id="upi" placeholder="Enter UPI ID" readonly required>
+        <button>Pay</button>
+    </div>
+    <script>
+        document.querySelector('button').addEventListener('click', function () {
+            const fileInput = document.getElementById('upi');
+            if (fileInput.files.length === 0) {
+                alert('Please upload a payment screenshot first.');
+            } else {
+                alert('Payment Successful! Redirecting to ticket...');
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const returnUrl = urlParams.get('returnUrl') || 'jungle_form.html';
+                window.location.href = returnUrl + '?payment=success';
+            }
+        });
+    </script>
+</body>
+
+</html>

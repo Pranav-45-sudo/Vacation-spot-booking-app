@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trek Booking Form</title>
+    <style>
+        body {
+            background-image:url('../../Static Folder/core/trekblur.png');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .log-container {
+            background-color: azure;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 550px;
+            padding: 30px;
+            border-radius: 12px;
+            box-sizing: border-box;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .log-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .log-header h2 {
+            font-size: 2rem;
+            color: black;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: black;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .member-entry {
+            background: #eef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 5px solid blue;
+        }
+
+        .button {
+            background: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        .price-note {
+            color: red;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Ticket Styles */
+        #ticket-view {
+            display: none;
+            padding: 20px;
+            border: 2px dashed #333;
+            background: #fff;
+            margin-top: 20px;
+        }
+
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ticket-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .ticket-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .ticket-value {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .ticket-total {
+            border-top: 2px solid #333;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-size: 1.3rem;
+            text-align: right;
+            color: #d63384;
+        }
+
+        @media print {
+            body {
+                background: white;
+                display: block;
+            }
+
+            .log-container {
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            #bookingForm,
+            .log-header h2,
+            .button {
+                display: none !important;
+            }
+
+            #ticket-view {
+                display: block !important;
+                border: 2px solid black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="log-container">
+
+        <!-- Booking Form -->
+        <div id="booking-form-container">
+            <div class="log-header">
+                <h2>Trek Booking Form</h2>
+            </div>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="date_available">Date Available:</label>
+                    <select>
+                        <option value="" disabled selected>-- Choose a Date --</option>
+                        <option value="2026-04-16">18-04-2026 to 19-04-2026</option>
+                        <option value="2026-04-17">25-04-2026 to 26-04-2026</option>
+                        <option value="2026-04-18">01-05-2026 to 02-05-2026 </option>
+                        <option value="2026-04-18">02-05-2026 to 03-05-2026 </option>
+                        <option value="2026-04-19">09-05-2026 to 10-05-2026</option>
+                        <option value="2026-04-20">16-05-2026 to 17-05-2026</option>
+                        <option value="2026-04-21">23-05-2026 to 24-05-2026</option>
+                        <option value="2026-04-22">30-05-2026 to 31-05-2026</option>
+                        <option value="2026-04-23">06-06-2026 to 07-06-2026</option>
+                        <option value="2026-04-24">13-06-2026 to 14-06-2026</option>
+                        <option value="2026-04-25">20-06-2026 to 21-06-2026</option>
+                        <option value="2026-04-26">26-06-2026 to 27-06-2026</option>
+                        <option value="2026-04-27">27-06-2026 to 28-06-2026</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="num_people">Number of people:</label>
+                    <input type="number" id="num_people" name="num_people" min="1" required>
+                </div>
+
+                <div id="members_container"></div>
+
+                <div class="form-group">
+                    <label>Choose group name:</label>
+                    <select id="group_name" name="group_name" required>
+                        <option value="" disabled selected>-- Choose a Group Name --</option>
+                        <option value="Sahyadri Rangers Treks and Tours">Sahyadri Rangers Treks and Tours</option>
+                        <option value="Bhatke Adventures">Bhatke Adventures</option>
+                        <option value="HikerWolf">HikerWolf</option>
+                        <option value="DarkGreen Adventures">DarkGreen Adventures</option>
+                        <option value="Bhatkanti maharashtrachi">Bhatkanti maharashtrachi</option>
+                        <option value="Wanderers">Wanderers</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Total Rent Cost:</label>
+                    <input type="text" id="display_cost" value="1500" readonly>
+                </div>
+
+                <div class="log-header">
+                    <p class="price-note">Advanced payment is mandatory to confirm booking.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment_method">Payment Method:</label>
+                    <select id="payment_method" name="payment_method" required>
+                        <option value="" disabled selected>-- Choose a Payment Method --</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Net Banking">Net Banking</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="button">Proceed to Pay</button>
+            </form>
+        </div>
+
+        <!-- Ticket View -->
+        <div id="ticket-view">
+            <div class="ticket-header">
+                <h2>TREK BOOKING CONFIRMATION</h2>
+                <p>Booking ID: <span id="ticket-id">#12345</span></p>
+            </div>
+
+            <div class="ticket-row"><span class="ticket-label">Tour Type:</span> <span class="ticket-value"
+                    id="t-tour"></span></div>
+            <div class="ticket-row"><span class="ticket-label">People:</span> <span class="ticket-value"
+                    id="t-people"></span></div>
+            <div class="ticket-row"><span class="ticket-label">Pets:</span> <span class="ticket-value"
+                    id="t-pet"></span></div>
+            <hr>
+            <div id="t-members"></div>
+
+            <div class="ticket-total">
+                TOTAL PAID: <span id="t-total"></span>
+            </div>
+
+            <button class="button" onclick="window.print()" style="background-color: #198754;">Print Ticket</button>
+            <button class="button" onclick="window.location.href='form.html'" style="background-color: #6c757d;">Book
+                Another</button>
+        </div>
+
+    </div>
+
+    <script>
+        const numPeopleInput = document.getElementById('num_people');
+        const membersContainer = document.getElementById('members_container');
+        const displayCost = document.getElementById('display_cost');
+
+        // Function to generate member fields dynamically
+        numPeopleInput.addEventListener('input', function () {
+            const count = parseInt(this.value);
+            membersContainer.innerHTML = ''; // Clear previous fields
+
+            if (count > 0) {
+                for (let i = 1; i <= count; i++) {
+                    const memberDiv = document.createElement('div');
+                    memberDiv.className = 'member-entry';
+                    memberDiv.innerHTML = `
+                    <p><strong>Member ${i} Details</strong></p>
+                    <label>Name:</label>
+                    <input type="text" id="member_name_${i}" name="member_name_${i}" required>
+                    <label>Age:</label>
+                    <input type="number" id="member_age_${i}" name="member_age_${i}" required>
+                `;
+                    membersContainer.appendChild(memberDiv);
+                }
+            }
+            updateCost();
+        });
+
+        // Function to update cost based on people and pets
+        function updateCost() {
+            const people = parseInt(numPeopleInput.value) || 0;
+            // Check if pet radio button exists and is checked
+            let petSelected = 'no';
+            const petRadios = document.getElementsByName('pet');
+            for (const radio of petRadios) {
+                if (radio.checked) {
+                    petSelected = radio.value;
+                    break;
+                }
+            }
+
+            const baseRent = 1500;
+            const petExtra = (petSelected === 'yes') ? 1500 : 0;
+
+            // Logic: 1500 per person? Original logic was baseRent * people
+            const total = (baseRent * people) + petExtra;
+            displayCost.value = total;
+            return total;
+        }
+
+        // Check for payment success on load
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('payment') === 'success') {
+                const savedData = JSON.parse(localStorage.getItem('trekBookingData'));
+                if (savedData) {
+                    showTicket(savedData);
+                }
+            }
+        };
+
+        function showTicket(data) {
+            document.getElementById('ticket-id').innerText = '#' + Math.floor(Math.random() * 100000);
+            document.getElementById('t-tour').innerText = data.tourType;
+            document.getElementById('t-people').innerText = data.people;
+            document.getElementById('t-pet').innerText = data.pet;
+            document.getElementById('t-total').innerText = '₹' + data.totalCost;
+
+            // Show members
+            let membersHtml = '';
+            data.members.forEach((m, index) => {
+                membersHtml += `<div class="ticket-row"><span class="ticket-label">Member ${index + 1}:</span> <span class="ticket-value">${m.name} (${m.age})</span></div>`;
+            });
+            document.getElementById('t-members').innerHTML = membersHtml;
+
+            document.getElementById('booking-form-container').style.display = 'none';
+            document.getElementById('ticket-view').style.display = 'block';
+        }
+
+        // Form Submission
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Gather Data
+            const tourType = document.getElementById('tour_type').value;
+            const people = document.getElementById('num_people').value;
+            let pet = 'no';
+            document.getElementsByName('pet').forEach(r => { if (r.checked) pet = r.value; });
+            const totalCost = updateCost();
+            const paymentMethod = document.getElementById('payment_method').value;
+
+            // Gather Members
+            const members = [];
+            const count = parseInt(people) || 0;
+            for (let i = 1; i <= count; i++) {
+                members.push({
+                    name: document.getElementById(`member_name_${i}`).value,
+                    age: document.getElementById(`member_age_${i}`).value
+                });
+            }
+
+            const bookingData = {
+                tourType, people, pet, totalCost, members
+            };
+            localStorage.setItem('trekBookingData', JSON.stringify(bookingData));
+
+            // Redirect
+            const returnUrl = 'form.html';
+            if (paymentMethod === 'UPI') {
+                window.location.href = `UPI.html?returnUrl=${returnUrl}`;
+            } else if (paymentMethod === 'Credit Card') {
+                window.location.href = `Credit Card.html?returnUrl=${returnUrl}`;
+            } else if (paymentMethod === 'Net Banking') {
+                window.location.href = `netbanking.html?returnUrl=${returnUrl}`;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

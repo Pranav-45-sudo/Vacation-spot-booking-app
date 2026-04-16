@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <title>VacMode App</title>
+    <style>
+        body {
+            background-image: url('../../Static Folder/core/jungleblur.png');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            justify-items: center;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        header {
+            position: absolute;
+            top: 20px;
+            font-size: 3cm;
+            color: blue;
+            margin: 0;
+        }
+
+        .card-group {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 24px;
+            padding: 40px;
+            flex-wrap: wrap;
+            margin-top: 15%;
+        }
+
+        .card {
+            width: 286px;
+            border-radius: 12px;
+            background-color: #1a1d20;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: #1a1d20 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: white;
+            margin: 0 0 10px 0;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #adb5bd;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        .card-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn {
+            background-color: blue;
+            color: aliceblue;
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+    <header>Jungle Safari</header>
+    <div class="card-group">
+        <div class="card">
+            <img src="../../Static Folder/core/Pench.png" alt="" class="card-img">
+            <div class="card-body">
+                <h3 class="card-title">Pench National Park</h3>
+                <p class="card-text">Experience the thrill of the wild at our Safari Lodge—your gateway to adventure!
+                </p>
+                <a href="jungle_form.html" class="btn">Book Now</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../Static Folder/core/Tadoba.png" alt="" class="card-img">
+            <div class="card-body">
+                <h3 class="card-title">Tadoba Andhari</h3>
+                <p class="card-text">"Immerse yourself in nature at our Tadoba Andhari—perfect for adventure seekers!"
+                </p>
+                <a href="jungle_form.html" class="btn">Book Now</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../Static Folder/core/Koyana.png" alt="" class="card-img">
+            <div class="card-body">
+                <h3 class="card-title">Koyana Forest</h3>
+                <p class="card-text">"Escape to tranquility at our Koyana Forest Retreat—ideal for nature lovers!"</p>
+                <a href="jungle_form.html" class="btn">Book Now</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../Static Folder/core/Radahanagari.png" alt="" class="card-img">
+            <div class="card-body">
+                <h3 class="card-title">Radahanagari Forest</h3>
+                <p class="card-text">"Discover the serene beauty of Radahanagari Forest—perfect for peaceful retreats!"
+                </p>
+                <a href="jungle_form.html" class="btn">Book Now</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

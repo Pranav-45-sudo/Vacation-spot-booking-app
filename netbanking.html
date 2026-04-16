@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway Interface</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .payment-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .method-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .method-btn.active {
+            border-color: #007bff;
+            background: #e7f1ff;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .pay-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="payment-container"
+        style="max-width: 400px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+        <h3>Net Banking</h3>
+        <p style="font-size: 0.9rem; color: #555;">Choose your bank from the list below to log in to your secure portal.
+        </p>
+
+        <form id="nbForm">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Select Bank</label>
+                <select id="bankSelect" required
+                    style="width:100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    <option value="">-- Popular Banks --</option>
+                    <option value="BOA">Bank of America</option>
+                    <option value="CHASE">J.P. Morgan Chase</option>
+                    <option value="CITI">Citibank</option>
+                    <option value="BARC">Barclays</option>
+                    <option value="HDFC">HDFC Bank</option>
+                </select>
+            </div>
+
+            <div
+                style="background: #fffbe6; padding: 10px; border-left: 4px solid #ffe58f; margin-bottom: 20px; font-size: 0.85rem;">
+                <strong>Note:</strong> You will be redirected to your bank's website to complete the transaction
+                securely.
+            </div>
+
+            <button type="submit"
+                style="width:100%; background: #28a745; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                Proceed to Bank
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('nbForm').onsubmit = (e) => {
+            e.preventDefault();
+            const bank = document.getElementById('bankSelect').value;
+            if (bank) {
+                alert("Payment Successful! Redirecting to ticket...");
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const returnUrl = urlParams.get('returnUrl') || 'jungle_form.html';
+                window.location.href = returnUrl + '?payment=success';
+
+            } else {
+                alert("Please select a bank to continue.");
+            }
+        };
+    </script>
+
+</body>
+
+</html>

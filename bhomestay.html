@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <title>Homestay</title>
+    </head>
+    <style>
+    body{
+      background-image: url('../../Static Folder/core/beachblur.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      flex-direction: row;   /* Stack groups vertically */
+      justify-content: center;
+      align-items: center;
+}
+
+/* Card Container */
+.card-group {
+  display: flex;
+  justify-content: center; /* Centers cards horizontally */
+  align-items: flex-start;
+  gap: 24px;              /* Space between cards */
+  padding: 40px;
+  flex-wrap: wrap;        /* Stack cards on small screens */
+}
+
+/* Individual Card Styling */
+.card {
+  width: 286px;
+  background-color: #1a1d20;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;      /* Crops image perfectly */
+  display: block;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  color: white;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.card-text {
+  color: #adb5bd;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  min-height: 60px;       /* Keeps card heights consistent */
+}
+
+/* Button Styling */
+.card-button {
+  display: inline-block;
+  background-color: #0d6efd;
+  color: white;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #0b5ed7;
+}
+
+</style>
+<body>
+
+<div class="card-group">
+  <div class="card">
+    <img src="../../Static Folder/core/Ekanthstay.png" alt="" class="card-img">
+    <div class="card-body">
+      <h3 class="card-title">Ekanth Stay</h3>
+      <p class="card-text">Ekanth Forest Homestays, located in the lush forests of Guhagar, Ratnagiri, is a nature lover’s dream. Surrounded by beaches, lakes, mangroves, and heritage temples, this eco-friendly retreat is just a 5-hour drive from Mumbai or Pune.</p>
+      <button> <a href="../../Templates/Core/formv.html" class="card-button">Book Now</a></button>
+    </div>
+  </div> 
+</div>
+<div class="card-group">
+  <div class="card">
+    <img src="../../Static Folder/core/ChaitanyaNiwas.png" alt="" class="card-img">
+    <div class="card-body">
+      <h3 class="card-title">Chaitanya Niwas</h3>
+      <p class="card-text">Chaitanya Niwas is a homestay located in the heart of Ratnagiri, Maharashtra. It offers a unique experience of staying in a traditional Maratha house, surrounded by lush greenery and natural beauty. The homestay is perfect for those who want to experience the local culture and lifestyle while enjoying a comfortable and peaceful stay.</p>
+   <a><button> href="../../Templates/Core/formv.html" class="card-button">Book Now</button></a>
+    </div>
+  </div> 
+</div>
+<div class="card-group">
+  <div class="card">
+    <img src="../../Static Folder/core/Hindustan.png" alt="" class="card-img">
+    <div class="card-body">
+      <h3 class="card-title">Hindustan Resort</h3>
+      <p class="card-text">Hindustan Resort is a homestay located in the heart of Ratnagiri, Maharashtra. It offers a unique experience of staying in a traditional Maratha house, surrounded by lush greenery and natural beauty. The homestay is perfect for those who want to experience the local culture and lifestyle while enjoying a comfortable and peaceful stay.</p>
+    <button> <a href="../../Templates/Core/formv.html" class="card-button">Book Now</a></button>
+    </div>
+  </div> 
+</div>
+</body>
+</html>

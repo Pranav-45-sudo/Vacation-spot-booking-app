@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Vacmode App</title>
+    </head>
+    <style>
+       body{
+        background-image: url('../../Static Folder/core/trip.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       }
+       header{
+        position: absolute;
+        margin:0;
+        top: 20px;
+        font-size: 5cm;
+        color: blue;
+        font-weight: 400 ;
+        
+        }
+        .button1{
+        color: rgb(255, 252, 252);
+        font-size: 30px;
+        background-color: red;
+        position: absolute;
+        align-items:right;
+        top: 20px;
+        margin-left: 93%;
+        }
+        .button2{
+            color: rgb(9, 244, 91);
+            font-size: 3cm;
+            align-items: center;
+        }
+    </style>
+    <body>
+        <header>VacMode App</header>
+        <button class="button1">
+        Exit
+        </button>
+        <button class="button2"><a href="2nd.html">
+        Welcome
+        </a>
+        </button>
+        <script>
+            var button1=document.getElementsByClassName("button1")[0];
+            button1.addEventListener("click",function(){    
+            if(confirm("Are you sure you want to exit?"))
+            {
+                alert("You have been logged out");
+            }
+        });
+        </script>
+    </body>
+</html>
